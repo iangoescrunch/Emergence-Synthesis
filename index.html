@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergence as a Construct | Ian McDermid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a1712;
+            --bg-paper: #22201b;
+            --bg-accent: #2a2720;
+            --text: #d4cfc4;
+            --text-muted: #9a9486;
+            --text-heading: #e8e2d6;
+            --accent: #c19a5b;
+            --accent-dim: #8a6d3e;
+            --rule: #3d3830;
+            --serif: 'Cormorant Garamond', 'Georgia', serif;
+            --body: 'Source Serif 4', 'Georgia', serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--body);
+            line-height: 1.75;
+            min-height: 100vh;
+        }
+
+        /* Subtle texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 5rem;
+        }
+
+        /* Header / Title Block */
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid var(--rule);
+            margin-bottom: 2.5rem;
+        }
+
+        header .course-label {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 .subtitle {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+
+        .author-block {
+            margin-top: 1.5rem;
+            font-family: var(--serif);
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .author-block .name {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Section headings */
+        h2 {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 2.5rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* Body text */
+        .essay p {
+            margin-bottom: 1.1rem;
+            text-align: justify;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+        }
+
+        .essay p.first::first-letter {
+            font-family: var(--serif);
+            font-size: 3.2rem;
+            float: left;
+            line-height: 0.8;
+            padding-right: 0.12em;
+            padding-top: 0.08em;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Inline definitions */
+        .def {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Separator */
+        .section-break {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--accent-dim);
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            letter-spacing: 0.5em;
+        }
+
+        /* References */
+        .references {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--rule);
+        }
+
+        .references h2 {
+            margin-top: 0;
+        }
+
+        .references p {
+            font-size: 0.85rem;
+            line-height: 1.65;
+            margin-bottom: 0.8rem;
+            padding-left: 2rem;
+            text-indent: -2rem;
+            text-align: left;
+            color: var(--text-muted);
+        }
+
+        .references p em {
+            color: var(--text);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--rule);
+            text-align: center;
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-dim);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            html { font-size: 16px; }
+            h1 { font-size: 1.8rem; }
+            .container { padding: 2rem 1.2rem 3rem; }
+            header { padding: 2.5rem 0 2rem; }
+        }
+
+        /* Print styles */
+        @media print {
+            body { background: white; color: #111; }
+            body::before { display: none; }
+            .container { max-width: 100%; }
+            h1, h2 { color: #111; }
+            .references p { color: #333; }
+            header { border-bottom-color: #ccc; }
+            .references { border-top-color: #ccc; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="course-label">Seminar Presentation &middot; Spring 2026</span>
+            <h1>
+                Emergence as a Construct
+                <span class="subtitle">From Black Box to Complexity Science</span>
+            </h1>
+            <div class="author-block">
+                <span class="name">Ian McDermid</span>
+            </div>
+        </header>
+
+        <article class="essay">
+
+            <p class="first">In 1999, Jeffrey Goldstein published "Emergence as a Construct: History and Issues" in the inaugural issue of <em>Emergence: Complexity and Organization</em>. The article proposed a formal definition: emergence is the arising of novel, coherent structures, patterns, and properties during the process of self-organization in complex systems (Goldstein, 1999). Goldstein identified five properties that mark a phenomenon as emergent: radical novelty, coherence across components, macro-level locus, dynamical character (emergents are not pre-given wholes but arise as systems evolve), and ostensive recognizability (emergents show themselves rather than being deduced). He traced the construct from Lewes's (1875) distinction between "resultant" and "emergent" chemical compounds, through the proto-emergentists of the 1920s (Morgan, Alexander, Broad), who treated emergence as a black box, to the complexity science of the late twentieth century. The Santa Fe Institute's complex adaptive systems, Haken's synergetics, and Prigogine's far-from-equilibrium thermodynamics, Goldstein argued, were opening that box through nonlinearity, attractor dynamics, and self-organization.</p>
+
+            <div class="section-break">&middot; &middot; &middot;</div>
+
+            <h2>The Reductionist Challenge</h2>
+
+            <p>The sharpest challenge to emergence as an explanatory construct came from the philosopher Jaegwon Kim. In "Making Sense of Emergence," Kim (1999) articulated the causal exclusion argument: if a physical event has a sufficient physical cause, then no distinct emergent property can do additional causal work without producing overdetermination, <span class="def">i.e., two fully sufficient causes for a single effect, which is implausible as a systematic feature of nature</span>. The argument rests on three premises: causal closure of the physical domain, <span class="def">i.e., every physical effect that has a cause at time <em>t</em> has a sufficient physical cause at <em>t</em></span>; the exclusion principle, <span class="def">i.e., no event has two distinct sufficient causes unless genuinely overdetermined</span>; and supervenience, <span class="def">i.e., emergent properties are instantiated only when their physical base properties are instantiated, such that no change in the emergent is possible without a change in the physical</span>. Together, these premises force a choice: either reduce the emergent property to its physical base, or accept that it is epiphenomenal, <span class="def">i.e., causally inert, a mere byproduct of physical processes that does no work in the world</span>. Kim (2005) extended this argument in <em>Physicalism, or Something Near Enough</em>, concluding that all mental phenomena except the intrinsic qualities of conscious experience (qualia) are in principle functionally reducible.</p>
+
+            <p>Kim's position found historical support in McLaughlin's (1992) account of British emergentism's decline. The proto-emergentists' paradigm case of emergence, the novel properties of chemical compounds, collapsed when quantum bonding theory explained those properties in terms of micro-level determinants. This vindicated the provisionality objection articulated by Hempel and Oppenheim (1948): emergence is a temporary label for phenomena that better theories will eventually reduce. If emergence is always just the current boundary of our ignorance, the construct has no stable referent.</p>
+
+            <p>Yet a counter-thesis had already appeared from within physics. Anderson (1972) argued that scale changes produce qualitative novelty that resists constructionist derivation. The ability to reduce a system to fundamental laws does not entail the ability to reconstruct its macro-level behavior from those laws. Anderson's argument targets the asymmetry between reduction (breaking down) and construction (building up): even if every level obeys the same fundamental physics, new organizational principles arise at each level that are not deducible from the level below. This observation implies that explanatory irreducibility may be a structural feature of nature, not a symptom of theoretical immaturity.</p>
+
+            <div class="section-break">&middot; &middot; &middot;</div>
+
+            <h2>Weak Emergence and the Resolution</h2>
+
+            <p>The philosophical deadlock between Kim's reductionism and Goldstein's emergentism began to dissolve with Bedau's (1997) concept of weak emergence. Bedau proposed that macro-level patterns in complex systems are derivable from micro-level interactions, but only by running the simulation; they are not deducible analytically. A weakly emergent pattern is one that can in principle be generated from the micro-rules yet cannot be predicted without stepping through the process. This formulation is metaphysically innocent (it does not posit novel ontological kinds), compatible with physicalism, and scientifically useful, especially in the complexity sciences that deal with life and mind.</p>
+
+            <p>Chalmers (2006) formalized the distinction between weak and strong emergence. A weakly emergent phenomenon arises from a lower-level domain but is unexpected given the principles governing that domain; a strongly emergent phenomenon is not deducible from the lower level even in principle. Most phenomena studied by complexity science, including self-organizing patterns, attractor dynamics, and nonlinear feedback systems, are weakly emergent. Chalmers suggested that consciousness may be the only plausible candidate for strong emergence. This taxonomy clarified where Kim's exclusion argument applies. Causal exclusion targets strong emergence specifically, because strong emergents claim novel causal powers over and above their physical bases. Weak emergence sidesteps the problem: weakly emergent properties do not claim irreducible causal powers. They claim explanatory irreducibility at a given level of description, which is precisely the kind of irreducibility Anderson (1972) identified.</p>
+
+            <p>The resolution preserves what Goldstein (1999) valued. The necessity of attending to macro-level organization, the inadequacy of part-based explanation alone, and the explanatory utility of attractor dynamics and self-organization all survive within weak emergence. The construct did not need metaphysical radicalism to do scientific work; it needed a principled account of why macro-level explanation is indispensable even when the micro-level is causally complete.</p>
+
+            <div class="section-break">&middot; &middot; &middot;</div>
+
+            <h2>Emergence in Cognitive Science Today</h2>
+
+            <p>Favela and Amon (2023) argued that cognitive science should be reframed as a complexity science, with emergence, nonlinearity, and self-organization as core constructs rather than imported metaphors. Cognition, in their framework, is the behavior of complex dynamical systems best understood at the macro level of agent-environment interaction. They operationalize emergence through the concept of interaction-dominant dynamics: when a cognitive system's behavior exhibits nonlinear feedback among its components (neural, bodily, environmental), the macro-level dynamics resist decomposition into separable component contributions. Neuronal avalanches, fractal scaling in motor behavior, and self-organized criticality in brain networks serve as empirical signatures of emergent organization, each measured through quantitative tools from nonlinear dynamical systems theory and information theory.</p>
+
+            <p>This program inherits its theoretical orientation from Chemero's (2009) radical embodied cognitive science, which describes cognition in terms of agent-environment dynamics rather than computation over internal representations. Emergence is load-bearing in that framework because the relevant explanatory level is the coupled agent-environment system, not the brain in isolation. Favela and Amon supply the methodological apparatus, drawing on synergetics and nonlinear dynamical systems theory, that makes Chemero's theoretical commitments empirically tractable. The result is a research program in which emergence functions not as a vague gesture toward wholeness but as a quantifiable property of systems that exhibit interaction-dominant, scale-free dynamics.</p>
+
+            <div class="section-break">&middot; &middot; &middot;</div>
+
+            <h2>Assessment</h2>
+
+            <p>Goldstein (1999) wrote that complexity theory was developing the tools, methods, and constructs necessary to render the process of emergence less opaque. Twenty-six years later, the construct has survived the strongest reductionist challenge in the philosophical literature, acquired a principled taxonomy (weak versus strong), and found empirical traction across cognitive science, neuroscience, and organizational dynamics. Emergence is no longer a placeholder for ignorance. It identifies a class of phenomena that require macro-level explanation, and complexity science now provides the mathematical and computational apparatus to deliver that explanation on its own terms.</p>
+
+        </article>
+
+        <section class="references">
+            <h2>References</h2>
+
+            <p>Anderson, P. W. (1972). More is different. <em>Science</em>, <em>177</em>(4047), 393–396. https://doi.org/10.1126/science.177.4047.393</p>
+
+            <p>Bedau, M. A. (1997). Weak emergence. <em>Philosophical Perspectives</em>, <em>11</em>, 375–399.</p>
+
+            <p>Chalmers, D. J. (2006). Strong and weak emergence. In P. Clayton & P. Davies (Eds.), <em>The re-emergence of emergence: The emergentist hypothesis from science to religion</em> (pp. 244–254). Oxford University Press.</p>
+
+            <p>Chemero, A. (2009). <em>Radical embodied cognitive science</em>. MIT Press.</p>
+
+            <p>Favela, L. H., & Amon, M. J. (2023). Reframing cognitive science as a complexity science. <em>Cognitive Science</em>, <em>47</em>(4), e13280. https://doi.org/10.1111/cogs.13280</p>
+
+            <p>Goldstein, J. (1999). Emergence as a construct: History and issues. <em>Emergence</em>, <em>1</em>(1), 49–72.</p>
+
+            <p>Kim, J. (1999). Making sense of emergence. <em>Philosophical Studies</em>, <em>95</em>, 3–36. https://doi.org/10.1023/A:1004563122154</p>
+
+            <p>Kim, J. (2005). <em>Physicalism, or something near enough</em>. Princeton University Press. https://doi.org/10.1515/9781400840847</p>
+
+            <p>McLaughlin, B. P. (1992). The rise and fall of British emergentism. In A. Beckermann, H. Flohr, & J. Kim (Eds.), <em>Emergence or reduction? Essays on the prospects of nonreductive physicalism</em> (pp. 49–93). De Gruyter.</p>
+
+        </section>
+
+        <footer>
+            McDermid &middot; 2026
+        </footer>
+    </div>
+</body>
+</html>
